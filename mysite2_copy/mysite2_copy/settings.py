@@ -77,12 +77,8 @@ WSGI_APPLICATION = 'mysite2_copy.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'mysite2_copy',
-        'USER': 'fardin',
-        'PASSWORD': '1370fard*',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
