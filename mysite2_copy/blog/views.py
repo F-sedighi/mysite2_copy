@@ -11,10 +11,11 @@ def blog_view(request):
 def blog_single(request, pid):
     posts = Post.objects.filter(status = 1)
     post = get_object_or_404(posts, pk=pid)
-    post.counted_view += 1
+    prev_post = posts.filter(id__lt=post.id).order_by('-id').first()
+    next_post = posts.filter(id__gt=post.id).order_by('id').first()
+    post.counted_view += 1  
     post.save()
-    print(post.counted_view)
-    context = {'post': post}
+    context = {'post': post, 'prev_post': prev_post, 'next_post':next_post}
     return render(request,'blog/blog-single.html', context)
 
 def test(request):
