@@ -16,34 +16,17 @@
     <h>related to function function</h>
     <p>test: {% function 2 %}</p>
 
-    <h>related to totalposts function</h>
-    <p>test: {% totalposts as tp %}</p>
-    <p>{{tp}}</p><br>
+     <p>{% totalposts  as tp %}</p>
 
-    <h>related to func2 function</h>
-    <p>test: {% posts as totalposts %}</p>
+     <p>{{tp}}</p>
+
+     <p>{% posts as totalposts %}</p>
     {% for post in totalposts %}
         <p>{{post}}</p>
+        <p>{{post.content | snippet}}</p>
     {% endfor %}
 
-    <h>related to snippet function</h>
-    <p>{% posts as totalposts%}</p>
-    {% for post in totalposts %}
-        <p>{{post.content | snippet:50}}</p>
-    {% endfor %}
-    <p>{{post.title}}</p>
-
-
-    <h>related to popularposts function</h>
-    <p>test: </p>
-    {% popularposts %}
-    
-    <h>related to postcategories function</h>
-    <p>test: </p>
-    {% for name,count in categories.items %}
-    {{name}}
-    {{count}}
-    {% endfor %}
+    <p>{% popularposts %}</p>
     <!-- <p>{{pid}}</p> -->
     
     <!-- <p>{{name}}</p>

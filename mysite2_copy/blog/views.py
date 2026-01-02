@@ -9,7 +9,7 @@ def blog_view(request):
     return render(request,'blog/blog-home.html', context)
 
 def blog_single(request, pid):
-    posts = Post.objects.filter(status = 1)
+    posts = Post.objects.filter(status = 1, published_date__lte = timezone.now())
     post = get_object_or_404(posts, pk=pid)
     prev_post = posts.filter(id__lt=post.id).order_by('-id').first()
     next_post = posts.filter(id__gt=post.id).order_by('id').first()
