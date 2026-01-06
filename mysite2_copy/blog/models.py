@@ -1,10 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
 # Create your models here.
 class Category(models.Model):
-    name = models.CharField(max_length = 255)
 
+    name = models.CharField(max_length = 255)
     def __str__(self):
         return self.name
         
@@ -26,10 +27,10 @@ class Post(models.Model):
     
     
     class Meta:
+        
         ordering = ['created_date']
         # verbose_name = 'پست'
         # verbose_name_plural = "پست ها"
-
 
     def __str__(self):
         return "{} - {}".format(self.title,self.id)

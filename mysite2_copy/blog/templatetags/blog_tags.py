@@ -14,12 +14,12 @@ def function(a=5):
 
 @register.simple_tag(name = 'totalposts')
 def func1():
-    posts = Post.objects.filter(status = 1).count()
+    posts = Post.objects.filter(status = 1).order_by('published_date').count()
     return posts
 
 @register.simple_tag(name = 'posts')
 def func2():
-    posts = Post.objects.filter(status = 1)
+    posts = Post.objects.filter(status = 1).order_by('published_date')
     return posts
 
 
@@ -39,9 +39,11 @@ def latestposts(arg=3):
 
 @register.inclusion_tag('blog/blog-post-categories.html')
 def postcategories():
-    posts = Post.objects.filter(status = 1)
+    posts = Post.objects.filter(status = 1).order_by('published_date')
     categories = Category.objects.all()
     cat_dict = {}
     for name in categories:
         cat_dict[name] = posts.filter(category=name).count()
     return {'categories':cat_dict}
+
+
