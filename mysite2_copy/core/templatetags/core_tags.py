@@ -4,6 +4,6 @@ from django.utils import timezone
 
 register = template.Library()
 @register.inclusion_tag('website/latest_from_our_blog.html')
-def latest_from_our_blog():
-    posts = Post.objects.filter(status = 1, published_date__lte = timezone.now())
+def latest_from_our_blog(arg):
+    posts = Post.objects.filter(status = 1, published_date__lte = timezone.now())[:arg]
     return {'posts': posts}
