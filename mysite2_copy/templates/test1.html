@@ -6,7 +6,7 @@
     <title>Form Test</title>
 </head>
 <body>
-    <form action="{% url 'website:test1' %}" method="post">
+    <form action="{% url 'core:test1' %}" method="post">
         {% csrf_token %}
         {{form.as_p}}
         <!--
