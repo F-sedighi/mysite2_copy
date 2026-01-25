@@ -12,14 +12,19 @@ class NameForm(forms.Form):
 class ContactForm(forms.ModelForm):
     #last_name = forms.CharField(max_length=255)
     #captcha = CaptchaField()
+    subject = forms.CharField(required=False, max_length=255, widget=forms.TextInput(attrs={'placeholder': 'Enter subject'}))
     class Meta:
         model = Contact
-        fields = '__all__'
-        exclude = ['name']
-        widget ={
-            "subject": forms.Widget.is_required
-        }
+        fields = ['email', 'subject', 'message'] 
          
+    def clean(self):
+        cleaned_data = super().clean()
+        # You can add additional checks here to skip validation for empty fields
+        if not cleaned_data.get('subject'):  # If it's empty, no validation error
+            cleaned_data['subject'] = None
+        return cleaned_data
+         
+    
         
 
 class NewsletterForm(forms.ModelForm):

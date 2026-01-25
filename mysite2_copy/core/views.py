@@ -5,6 +5,7 @@ from core.models import Contact
 from core.forms import NameForm, ContactForm, NewsletterForm
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib import messages
+from django.shortcuts import redirect
 
 
 # Create your views here.
@@ -14,22 +15,29 @@ def index_view(request):
     context = {'posts': posts}
     return render(request,'website/index.html', context = context)
 
+
 def about_view(request):
     return render(request,'website/about.html')
 
+
 def elements_view(request):
     return render(request, 'website/elements.html')
+
 
 def contact_view(request):
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
+            instance = form.save(commit=False)
+            instance.name = "unknown"
+            instance.save()
             form.save()
             messages.add_message(request, messages.SUCCESS, 'your ticket submited successfully')
         else:
             messages.add_message(request, messages.ERROR, 'your ticket didnt submited')
     form = ContactForm()
     return render(request,'website/contact.html', {'form':form})
+
 
 def newsletter_view(request):
     if request.method == 'POST':
@@ -39,6 +47,7 @@ def newsletter_view(request):
             return HttpResponseRedirect('/')
     else:
         return HttpResponseRedirect('/') 
+
 
 def test1_view(request):
     if request.method == 'POST':
