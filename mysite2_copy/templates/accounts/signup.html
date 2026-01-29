@@ -18,13 +18,17 @@
     <form class="form-signin" method="post" action="{% url 'accounts:signup' %}">
     {% csrf_token %}
   <img class="mb-4" src="https://getbootstrap.com/docs/4.3/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
-  <h1 class="h3 mb-3 font-weight-normal">Please Sign up</h1>
+  <!-- {{form.as_p}} -->
+   <h1 class="h3 mb-3 font-weight-normal">Please Sign up</h1>
    <label for="inputEmail" class="sr-only">Username</label>
   <input type="text" name="username" class="form-control" placeholder="Username" required autofocus>
   <label for="inputPassword" class="sr-only">Password</label>
   <input type="password" name="password1" class="form-control" placeholder="Password" required> 
   <label for="inputPassword" class="sr-only">Confirm Password</label>
   <input type="password" name="password2" class="form-control" placeholder="Confirm Password" required>
+
+  <label for="inputEmail" class="sr-only">Email</label>
+  <input type="email" name="you@example.com" class="form-control" placeholder="you@example.com" required> 
 
   <div class="checkbox mb-3">
     <label>
