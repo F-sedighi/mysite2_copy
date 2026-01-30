@@ -58,11 +58,13 @@ def signup_view(request):
         if request.method == "POST":
             form = EmailCreationForm(request.POST)
             if form.is_valid():
-                instance = form.save(commit=False)
+                instance = form.save(commit=True)
                 instance.email = form.cleaned_data.get('email')  # Assuming there's an email field in the form
                 instance.save()
                 print(form.__dict__)
                 return redirect('/')
+            else:
+                print(form.errors)
         form = EmailCreationForm()
         context = {'form': form}
         return render(request, 'accounts/signup.html', context)

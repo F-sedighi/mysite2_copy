@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.humanize',
+    'django_extensions',
     'django.contrib.sites',
     'django.contrib.sitemaps',
     'django.contrib.sessions',
@@ -140,3 +141,19 @@ STATICFILES_DIRS = [
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'accounts.User'
+
+# For forgot password
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOTS = 'smtp.gmail.com'
+EMAIL_PORT = '587'
+EMAIL_USE_TLS = 'True'
+EMAIL_HOST_USER = 'fardinsedighi1@gmail.com'
+EMAIL_HOST_PASSWORD = 'ljit nrfx cnhg cjkh'
+
+# Custom email subject
+PASSWORD_RESET_SUBJECT_TEMPLATE = 'registration/password_reset_subject.txt'
+PASSWORD_RESET_EMAIL_TEMPLATE = 'registration/password_reset_email.html'
+
+PASSWORD_RESET_TIMEOUT_DAYS = 1  # Default is 3 days
+
+

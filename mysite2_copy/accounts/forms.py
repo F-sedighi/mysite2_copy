@@ -3,7 +3,7 @@ from django import forms
 from django.utils.translation import gettext_lazy as _
 from django.core.exceptions import ValidationError
 from .models import User
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, PasswordResetForm
 
 
 class EmailOrUsernameAuthenticationForm(AuthenticationForm):
@@ -32,5 +32,10 @@ class EmailCreationForm(UserCreationForm):
     class Meta:
         model = User
         fields = ['username', 'email', 'password1', 'password2']  # Include email explicitly
+
+class CustomPsswordResetForm(PasswordResetForm):
+    email = forms.EmailField(label="Enter your email address",
+                             widget=forms.TextInput(attrs={"placeholder": "Email", "class": "form-control"})
+    )
 
 
