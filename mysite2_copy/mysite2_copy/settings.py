@@ -147,13 +147,16 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOTS = 'smtp.gmail.com'
 EMAIL_PORT = '587'
 EMAIL_USE_TLS = 'True'
-EMAIL_HOST_USER = 'fardinsedighi1@gmail.com'
+EMAIL_HOST_USER = 'sedighifardin1@gmail.com'
 EMAIL_HOST_PASSWORD = 'ljit nrfx cnhg cjkh'
 
 # Custom email subject
-PASSWORD_RESET_SUBJECT_TEMPLATE = 'registration/password_reset_subject.txt'
-PASSWORD_RESET_EMAIL_TEMPLATE = 'registration/password_reset_email.html'
+PASSWORD_RESET_EMAIL_TEMPLATE = 'registration/password_reset_email.html' # By default, Django sends an email with a simple message containing a password reset link. You can customize this email’s content by overriding the email templates.
+PASSWORD_RESET_SUBJECT_TEMPLATE = 'registration/password_reset_subject.txt' # Django uses the PasswordResetEmail class to send the password reset email. You can override the email subject and content in a custom template.
 
 PASSWORD_RESET_TIMEOUT_DAYS = 1  # Default is 3 days
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
 
 
