@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'multi_captcha_admin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -38,12 +39,14 @@ INSTALLED_APPS = [
     'django_extensions',
     'django.contrib.sites',
     'django.contrib.sitemaps',
-    'robots',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'debug_toolbar',
+    'django_summernote',
+    'robots',
     'taggit',
+    'debug_toolbar',
+    'captcha',
     'accounts.apps.AccountsConfig',
     'blog',
     'core',
@@ -51,6 +54,7 @@ INSTALLED_APPS = [
 
 # Site framework
 SITE_ID = 2
+
 ROBOTS_USE_HOST = False
 # ROBOTS_USE_SITEMAP = False
 
@@ -150,23 +154,38 @@ INTERNAL_IPS = [
     '127.0.0.1',
 ]
 
+FRAME_OPTIONS = "SAMEORIGIN"
+
+# Captcha admin settings
+MULTI_CAPTCHA_ADMIN = {
+    'engine': 'simple-captcha',
+}
+
 AUTH_USER_MODEL = 'accounts.User'
 
+AUTHENTICATION_BACKENDS = [
+    "accounts.backends.EmailOrUsernameBackend",
+    "django.contrib.auth.backends.ModelBackend",
+]
+
 # For forgot password
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOTS = 'smtp.gmail.com'
-EMAIL_PORT = '587'
-EMAIL_USE_TLS = 'True'
-EMAIL_HOST_USER = 'sedighifardin1@gmail.com'
-EMAIL_HOST_PASSWORD = 'ljit nrfx cnhg cjkh'
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' # For dev
+
+# For Gmail and product
+
+#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+#EMAIL_HOTS = 'smtp.gmail.com'
+#EMAIL_PORT = '587'
+#EMAIL_USE_TLS = 'True'
+#EMAIL_HOST_USER = 'sedighifardin1@gmail.com'
+#EMAIL_HOST_PASSWORD = 'ljit nrfx cnhg cjkh'
 
 # Custom email subject
 PASSWORD_RESET_EMAIL_TEMPLATE = 'registration/password_reset_email.html' # By default, Django sends an email with a simple message containing a password reset link. You can customize this email’s content by overriding the email templates.
 PASSWORD_RESET_SUBJECT_TEMPLATE = 'registration/password_reset_subject.txt' # Django uses the PasswordResetEmail class to send the password reset email. You can override the email subject and content in a custom template.
 
 PASSWORD_RESET_TIMEOUT_DAYS = 1  # Default is 3 days
-
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 
 

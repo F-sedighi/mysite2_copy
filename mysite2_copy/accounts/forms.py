@@ -12,6 +12,9 @@ class EmailOrUsernameAuthenticationForm(AuthenticationForm):
         widget=forms.TextInput(attrs={"autofocus": True})
     )
 
+    class Meta:
+        model = User
+        fields = ['username', 'password']
 
 # Custom validator to ensure unique email
 def validate_unique_email(value):

@@ -16,15 +16,14 @@ class Category(models.Model):
         return self.name
         
 class Post(models.Model):
-   
-    tag = TaggableManager()
 
     image = models.ImageField(upload_to = 'blog/', default = 'blog/default.jpg')
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
-    # title
-
     title = models.CharField(max_length = 255)
     content = models.TextField()
+
+    tag = TaggableManager()
+    
     category = models.ManyToManyField(Category)
     counted_view = models.IntegerField(default = 0) # default = 0
     status = models.BooleanField(default = False)

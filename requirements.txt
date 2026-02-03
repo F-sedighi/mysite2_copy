@@ -4,3 +4,6 @@ django-extensions
 django-robots
 django-debug-toolbar
 django-taggit
+django-summernote
+django-simple-captcha
+django-multi-captcha-admin

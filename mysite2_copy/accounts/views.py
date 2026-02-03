@@ -80,70 +80,70 @@ def signup_view(request):
     else:
         return redirect('/')
     
-def password_reset_request(request):
-    form = PasswordResetRequestForm(request.POST or None)
+#def password_reset_request(request):
+#    form = PasswordResetRequestForm(request.POST or None)
+#
+#    if request.method == 'POST' and form.is_valid():
+#        email = form.cleaned_data['email']
+#        user = User.objects.filter(email=email).first()
+#
+#        if user:
+#            uid = urlsafe_base64_encode(force_bytes(user.pk))
+#            token = default_token_generator.make_token(user)
+#
+#            reset_url = request.build_absolute_uri(
+#                reverse('accounts:password_reset_confirm',
+#                        kwargs={'uidb64': uid, 'token': token}
+#                )
+#            )
+#
+#            context = {
+#                'user':user,
+#                'reset_url': reset_url,
+#                'site_name': 'My Awesome Site',
+#            }
+#
+#            subject = 'Reset Password'
+#            message = render_to_string(
+#                'registration/password_reset_email.html',
+#                context
+#            )
+#
+#            send_mail(
+#                subject,
+#                message,
+#                settings.DEFAULT_FROM_EMAIL,
+#                [user.email]
+#            )
+#
+#        return redirect('accounts:password_reset_done')
+#    return render(request, 'registration/password_reset_form.html', {'form': form})
 
-    if request.method == 'POST' and form.is_valid():
-        email = form.cleaned_data['email']
-        user = User.objects.filter(email=email).first()
+#def password_reset_confirm(request, uidb64, token):
+#    try:
+#        uid = force_str(urlsafe_base64_decode(uidb64))
+#        user = User.objects.get(pk=uid)
+#    except:
+#        user = None
+#    
+#    if user is None or not default_token_generator.check_token(user, token):
+#        return render(request, 'accounts/password_reset_invalid.html')
+#    
+#    form = SetNewPasswordForm(request.POST or None)
+#
+#    if request.method == 'POST' and form.is_valid():
+#        user.set_password(form.cleaned_data['password1'])
+#        user.save()
+#        return redirect('accounts:password_reset_complete')
+#    
+#    return render(
+#        request,
+#        'registration/password_reset_confirm.html',
+#        {'form': form}
+#    )
 
-        if user:
-            uid = urlsafe_base64_encode(force_bytes(user.pk))
-            token = default_token_generator.make_token(user)
+#def password_reset_done(request):
+#    return render(request, 'registration/password_reset_done.html')
 
-            reset_url = request.build_absolute_uri(
-                reverse('accounts:password_reset_confirm',
-                        kwargs={'uidb64': uid, 'token': token}
-                )
-            )
-
-            context = {
-                'user':user,
-                'reset_url': reset_url,
-                'site_name': 'My Awesome Site',
-            }
-
-            subject = 'Reset Password'
-            message = render_to_string(
-                'registration/password_reset_email.html',
-                context
-            )
-
-            send_mail(
-                subject,
-                message,
-                settings.DEFAULT_FROM_EMAIL,
-                [user.email]
-            )
-
-        return redirect('accounts:password_reset_done')
-    return render(request, 'registration/password_reset_form.html', {'form': form})
-
-def password_reset_confirm(request, uidb64, token):
-    try:
-        uid = force_str(urlsafe_base64_decode(uidb64))
-        user = User.objects.get(pk=uid)
-    except:
-        user = None
-    
-    if user is None or not default_token_generator.check_token(user, token):
-        return render(request, 'accounts/password_reset_invalid.html')
-    
-    form = SetNewPasswordForm(request.POST or None)
-
-    if request.method == 'POST' and form.is_valid():
-        user.set_password(form.cleaned_data['password1'])
-        user.save()
-        return redirect('accounts:password_reset_complete')
-    
-    return render(
-        request,
-        'accounts/password_reset_confirm.html',
-        {'form': form}
-    )
-
-def password_reset_done(request):
-    return render(request, 'registration/password_reset_done.html')
-
-def password_reset_complete(request):
-    return render(request, 'registration/password_reset_complete.html')
+#def password_reset_complete(request):
+#    return render(request, 'registration/password_reset_complete.html')
