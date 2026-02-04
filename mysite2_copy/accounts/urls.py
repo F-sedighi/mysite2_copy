@@ -19,7 +19,7 @@ urlpatterns = [
     path('password_reset/done/', auth_views.PasswordResetDoneView.as_view(), name='password_reset_done'),#Displays a confirmation message that the password reset link has been sent.
     path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(), name='password_reset_confirm'),#This is the form where the user will reset their password after clicking the link in their email.
     path('reset/done/', auth_views.PasswordResetCompleteView.as_view(), name='password_reset_complete'),#Displays a confirmation that the password has been successfully reset.
-    path('login', auth_views.LoginView.as_view(), name = 'login'),
+    #path('login', auth_views.LoginView.as_view(), name = 'login'),
     
     # Password reset urls for custom function
 
