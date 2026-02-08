@@ -4,30 +4,31 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, Pass
 from django.contrib.auth.decorators import login_required
 from .forms import EmailCreationForm, EmailOrUsernameAuthenticationForm, SetNewPasswordForm
 from .models import User
-from django.contrib.auth.tokens import default_token_generator
-from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.core.mail import send_mail
-from django.urls import reverse
-from .forms import PasswordResetRequestForm
-from django.utils.encoding import force_bytes, force_str
-from django.template.loader import render_to_string
-from django.conf import settings
-
+from django.contrib import messages
 
 
 def login_view(request):
     if not request.user.is_authenticated:
         if request.method == 'POST':
             form = EmailOrUsernameAuthenticationForm(request=request, data=request.POST)
+
             if form.is_valid():
                 username_or_email = form.cleaned_data.get('username')  # This can be username or email
                 password = form.cleaned_data.get('password')
                 user = authenticate(request, username=username_or_email, password=password)
                 if user is not None:
                     login(request, user)
-                    #next_page = request.GET.get('next')
-                    #return redirect(next_page if next_page else '/')
+                    messages.success(request, 'The login was successful')
                     return redirect('/')
+                else:    
+                    messages.error(request, 'The username or password is incorrect.')
+                    return redirect('/')
+            else:
+                messages.error(request, 'not valid form')
+                error_form = form.errors        
+                context = {'error_form':error_form}
+                return render(request, 'accounts/login.html', context)
+            
         form = EmailOrUsernameAuthenticationForm()
         context = {'form': form}
         return render(request, 'accounts/login.html', context)
@@ -80,6 +81,9 @@ def signup_view(request):
     else:
         return redirect('/')
     
+
+ 
+
 #def password_reset_request(request):
 #    form = PasswordResetRequestForm(request.POST or None)
 #
